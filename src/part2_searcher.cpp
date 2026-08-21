@@ -21,7 +21,33 @@ int main(int argc, char **argv)
 	int search_start_position = atoi(argv[3]);
 	int search_end_position = atoi(argv[4]);
 
-	//TO DO
+	//TODO
+	FILE *file=fopen(file_to_search_in,"r");
+	if(file==nullptr){
+		perror("Failed to open File");
+		return 0;
+	}
+
+	int len=0;
+	fseek(file, search_start_position, SEEK_SET);
+	while(pattern_to_search_for[len]!='\0')len++;
+	bool has=false;
+	for(int i=search_start_position;i<=search_end_position;i++){
+		fseek(file, i, SEEK_SET);
+		bool match=true;
+		for(int j=0;j<len;j++){
+			int ch=fgetc(file);
+			if(ch==EOF || ch!=pattern_to_search_for[j]){
+				match=false;
+				break;
+			}
+		}
+		if(match){
+			cout << getpid() << " found at " << i << endl;
+			has=true;
+		}
+	}
+	if(has)return 1;
 	cout << "[-1] didn't find\n";
 	return 0;
 }
