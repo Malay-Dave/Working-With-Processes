@@ -44,10 +44,9 @@ int main(int argc, char **argv)
 		}
 		if(match){
 			cout << getpid() << " found at " << i << endl;
-			has=true;
+			return 1;
 		}
 	}
-	if(has)return 1;
 	cout << "[-1] didn't find\n";
 	return 0;
 }
