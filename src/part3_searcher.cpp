@@ -53,6 +53,6 @@ int main(int argc, char **argv)
 			return 1;
 		}
 	}
-	cout << "[-1] didn't find\n";
+	cout << "["<< getpid() <<"] didn't find\n";
 	return 0;
 }
